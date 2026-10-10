@@ -155,21 +155,5 @@ details p { color:var(--muted);font-size:13px;line-height:1.7;margin:12px 0 0; }
 .customer-heading { border-top:1px solid var(--line);padding-top:19px; }
 .total > div { display:flex;flex-direction:column;gap:4px; }
 .total small { color:#dcebdd;font-size:11px; }
-
-.format-picker { margin: 20px 0 22px; }
-.format-picker-label { display:block;color:var(--forest);font-size:12px;font-weight:900;letter-spacing:.06em;margin-bottom:5px; }
-.format-picker-intro { color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 12px; }
-.format-options { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px; }
-.format-option { display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;text-align:left;padding:15px 13px;border:2px solid #dce6d7;border-radius:15px;background:#fff;cursor:pointer;color:var(--forest);transition:border-color .15s,background .15s,box-shadow .15s; }
-.format-option:hover { border-color:#8db48a; }
-.format-option-active { border-color:var(--green);background:#f2f8ed;box-shadow:0 0 0 2px rgba(40,105,58,.08); }
-.format-option-top { display:flex;align-items:center;gap:8px; }
-.format-radio { display:grid;place-items:center;width:20px;height:20px;flex-shrink:0;border:1.5px solid #aebda9;border-radius:50%;font-size:12px;font-weight:900; }
-.format-option-active .format-radio { color:white;background:var(--green);border-color:var(--green); }
-.format-option-name { font-size:11px;font-weight:900;letter-spacing:.02em; }
-.format-option-price { font-family:Nunito,sans-serif;font-size:24px;line-height:1.1;color:var(--forest); }
-.format-option-desc { color:var(--muted);font-size:11px;line-height:1.45; }
-.format-option-foot { color:var(--green);font-size:10px;font-weight:800;line-height:1.4; }
-@media(max-width:520px) { .format-options { grid-template-columns:1fr; } .format-option { padding:14px; } }
 @media(max-width:1000px) { .product-catalog { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:520px) { .product-catalog { grid-template-columns:1fr; } .product-image { min-height:180px; } .selected-summary > div { flex-direction:column;gap:4px; } .selected-summary strong { text-align:left; } }
