@@ -1,6 +1,6 @@
 
 import { NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { deliverPaidPdfOrder } from "@/lib/email-delivery";
 import { Bayarcash } from "bayarcash-ts-sdk";
 
