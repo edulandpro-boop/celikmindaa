@@ -14,6 +14,7 @@ Mobile-first green/Islamic-themed storefront for Vercel. Product prices are read
    - `CMAB-HC` RM20, includes postage
 3. In Bayarcash console, get Personal Access Token and API Secret Key under Profile > Integration, and Portal Key under Portal.
 4. Copy `.env.example` to `.env.local` and fill in real credentials. Never commit `.env.local`.
+   Required server variables: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `BAYARCASH_API_TOKEN`, `BAYARCASH_API_SECRET_KEY`, `BAYARCASH_PORTAL_KEY`, `NEXT_PUBLIC_SITE_URL`. The browser key `NEXT_PUBLIC_SUPABASE_ANON_KEY` is included for future client-side Supabase use; server routes use the service-role key.
 5. Install and test locally:
    ```bash
    npm install
@@ -30,11 +31,12 @@ Mobile-first green/Islamic-themed storefront for Vercel. Product prices are read
 - The Supabase `service_role` key and Bayarcash token/secret are server-only environment variables. Never use them in `NEXT_PUBLIC_*` variables or browser code.
 - The callback validates the Bayarcash transaction checksum before changing order status.
 - The current callback expects the Bayarcash v3 transaction callback to arrive as form data, as described by the SDK. Confirm with the sandbox payload before production.
+- Supabase server client initialization is lazy so missing environment variables do not crash `next build`; API routes still return configuration errors until the variables are set.
 - The return page is not proof of payment. The verified server-to-server callback updates the order.
 - Confirm your Bayarcash account has FPX enabled. The integration currently requests FPX channel 1.
-- PDF email delivery uses Resend and signed URLs from a private Supabase Storage bucket. Run `supabase/migrations/20261009_email_delivery.sql`, create a private `celik-minda-pdfs` bucket, and upload `set-a.pdf` and `set-b.pdf`.
-- Add `RESEND_API_KEY`, `EMAIL_FROM`, `PDF_STORAGE_BUCKET`, `PDF_SET_A_PATH`, `PDF_SET_B_PATH`, and `PDF_LINK_EXPIRY_SECONDS` from `.env.example` to Vercel Environment Variables.
-- Verify your sender domain in Resend before live sending. Signed PDF links expire after 7 days by default.
+- PDF email delivery uses the configured Google Drive folder links in `lib/email-delivery.ts`; it does not use signed Supabase Storage URLs.
+- Add `RESEND_API_KEY` and `EMAIL_FROM` to Vercel Environment Variables to enable automatic email delivery.
+- Verify your sender domain in Resend before live sending. Google Drive folder links are shareable and are not protected per customer.
 - The callback validates Bayarcash transaction checksum before marking paid and initiating delivery. Confirm callback payload/status behavior in sandbox before production.
 - The page uses an illustrative cover mockup made with CSS; replace it with the real product cover and genuine worksheet previews before publishing.
 - No credentials are included in this archive.

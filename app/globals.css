@@ -112,3 +112,48 @@ details p { color:var(--muted);font-size:13px;line-height:1.7;margin:12px 0 0; }
  .field.full { grid-column:auto; }
  .actions .btn { width:100%; }
 }
+
+/* Parent-focused reassurance copy */
+.hero-promise { display:flex; flex-direction:column; gap:6px; max-width:560px; margin-top:22px; padding:15px 17px; border-left:3px solid var(--gold); border-radius:0 12px 12px 0; background:#ffffff0d; }
+.hero-promise strong { color:#f0d99d; font-size:14px; }
+.hero-promise span { color:#e1eee2; font-size:13px; line-height:1.65; }
+.purchase-reassurance { display:grid; gap:12px; margin-top:18px; }
+.purchase-reassurance > div { display:flex; flex-direction:column; gap:4px; padding:13px 15px; border-radius:13px; background:#ffffffb8; border:1px solid var(--line); }
+.purchase-reassurance strong { color:var(--forest); font-size:13px; }
+.purchase-reassurance span { color:var(--muted); font-size:12px; line-height:1.6; }
+@media(max-width:520px) { .hero-promise { margin-top:18px; } }
+
+/* Product choice and checkout hierarchy update */
+.product-catalog { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.product { position:relative; transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease; }
+.product.selected-product { border:2px solid var(--green);box-shadow:0 12px 30px #123c1a18;transform:translateY(-2px); }
+.product-image { min-height:210px; }
+.product-placeholder { aspect-ratio:3/4; }
+.pdf-placeholder { background:linear-gradient(145deg,#f1f7ec,#fff); }
+.hardcopy-placeholder { background:linear-gradient(145deg,#f8f0dc,#fffdf7); }
+.product-placeholder strong { font-size:23px; }
+.product-placeholder b { font-size:29px; }
+.format-label { display:inline-flex;align-self:flex-start;border-radius:7px;padding:5px 8px;background:#eef3ea;color:var(--forest);font-size:11px;font-weight:800; }
+.chosen-tag { border-radius:999px;background:var(--green);color:white;font-size:10px;font-weight:900;padding:6px 8px; }
+.btn-selected { background:var(--forest);color:white;border:1px solid var(--forest); }
+.checkout-heading { margin-bottom:16px; }
+.checkout-heading h3 { font-family:Nunito,sans-serif;color:var(--forest);font-size:23px;margin:7px 0 5px; }
+.checkout-heading p { color:var(--muted);font-size:12px;line-height:1.6;margin:0; }
+.checkout-step { color:var(--green);font-size:10px;font-weight:900;letter-spacing:.1em; }
+.selected-summary { display:grid;gap:10px;padding:15px;border:1px solid #dce6d7;background:#f7faf4;border-radius:14px;margin-bottom:18px; }
+.selected-summary > div { display:flex;justify-content:space-between;gap:14px;align-items:flex-start; }
+.selected-summary span { color:var(--muted);font-size:12px; }
+.selected-summary strong { color:var(--forest);font-size:13px;text-align:right; }
+.text-link { border:0;background:transparent;color:var(--green);text-align:left;text-decoration:underline;font-size:12px;font-weight:800;cursor:pointer;padding:2px 0; }
+.payment-method-card { border:1px solid #dce6d7;border-radius:14px;padding:15px;margin-bottom:22px;background:white; }
+.payment-method-title { display:flex;align-items:center;gap:12px;margin-top:10px; }
+.payment-icon { display:grid;place-items:center;width:52px;height:38px;flex-shrink:0;border-radius:9px;background:#103e23;color:white;font-size:13px;font-weight:900;letter-spacing:.04em; }
+.payment-method-title strong,.payment-method-title small { display:block; }
+.payment-method-title strong { color:var(--forest);font-size:13px;line-height:1.5; }
+.payment-method-title small { color:var(--muted);font-size:11px;line-height:1.5;margin-top:3px; }
+.payment-trust { display:grid;gap:6px;margin-top:13px;color:var(--muted);font-size:11px; }
+.customer-heading { border-top:1px solid var(--line);padding-top:19px; }
+.total > div { display:flex;flex-direction:column;gap:4px; }
+.total small { color:#dcebdd;font-size:11px; }
+@media(max-width:1000px) { .product-catalog { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:520px) { .product-catalog { grid-template-columns:1fr; } .product-image { min-height:180px; } .selected-summary > div { flex-direction:column;gap:4px; } .selected-summary strong { text-align:left; } }
