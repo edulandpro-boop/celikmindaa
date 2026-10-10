@@ -110,19 +110,27 @@ export async function POST(request: Request) {
     }
     orderId = String(order.id);
 
+    // Match the actual celik_minda_order_items schema: prices are stored in sen.
     const { error: itemError } = await supabase.from("celik_minda_order_items").insert({
       order_id: order.id,
-      product_id: product.id,
+      product_id: product.id ?? null,
+      sku: String(product.sku),
       product_name: `${product.name} (${product.age_group})`,
-      format: product.format,
+      format: String(product.format),
       quantity: 1,
-      unit_price: totalSen / 100,
+      unit_price_sen: totalSen,
+      line_total_sen: totalSen,
     });
 
     if (itemError) {
-      console.error("Order item insert failed:", itemError.message);
+      console.error("Order item insert failed:", itemError.message, itemError.details, itemError.hint);
+      // Remove the pending order so a failed checkout does not leave an orphan order.
       await supabase.from("celik_minda_orders").delete().eq("id", order.id);
-      return NextResponse.json({ error: "Butiran produk gagal disimpan. Semak jadual celik_minda_order_items." }, { status: 500 });
+      return NextResponse.json({
+        error: "Butiran produk gagal disimpan.",
+        details: itemError.message,
+        hint: itemError.hint || undefined,
+      }, { status: 500 });
     }
 
     const amount = Number((totalSen / 100).toFixed(2));

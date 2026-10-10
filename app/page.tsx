@@ -173,13 +173,24 @@ export default function HomePage() {
               </div>
               <div className="payment-method-card"><span className="checkout-step">LANGKAH 2 · PEMBAYARAN</span><div className="payment-method-title"><span className="payment-icon">FPX</span><div><strong>Perbankan online melalui Bayarcash</strong><small>Anda akan dibawa ke halaman pembayaran yang selamat untuk memilih bank.</small></div></div><div className="payment-trust"><span>✓ Tiada maklumat perbankan diminta di borang ini</span><span>✓ Semak jumlah sebelum bayar</span></div></div>
               <div className="checkout-heading customer-heading"><span className="checkout-step">LANGKAH 3 · MAKLUMAT PEMBELI</span><h3>Maklumat pembeli dan penghantaran</h3><p>Alamat rumah hanya akan diminta jika anda memilih hardcopy. Pembelian PDF tidak memerlukan alamat penghantaran.</p></div>
-              <div className="field">
-                <label htmlFor="format">Pilih format bahan</label>
-                <select id="format" value={selectedFormat} onChange={(e) => setSelectedFormat(e.target.value as "PDF" | "Hardcopy")} required>
-                  <option value="PDF">PDF — {selectedGroup === "CMAB" ? "RM18" : "RM10"} · fail digital, cetak sendiri</option>
-                  <option value="Hardcopy">Hardcopy — {selectedGroup === "CMAB" ? "RM20 termasuk postage" : "RM15"} · dihantar ke rumah</option>
-                </select>
-                <small className="field-hint">Set dipilih: {selectedGroup === "CMA" ? "Set A" : selectedGroup === "CMB" ? "Set B" : "Combo Set A + B"}</small>
+              <div className="field format-picker">
+                <span className="format-picker-label">PILIH FORMAT PEMBELIAN</span>
+                <p className="format-picker-intro">Pilih salah satu pilihan di bawah. Harga akan dikemas kini secara automatik.</p>
+                <div className="format-options" role="group" aria-label="Pilih format bahan">
+                  <button type="button" className={`format-option ${selectedFormat === "PDF" ? "format-option-active" : ""}`} aria-pressed={selectedFormat === "PDF"} onClick={() => setSelectedFormat("PDF")}>
+                    <span className="format-option-top"><span className="format-radio" aria-hidden="true">{selectedFormat === "PDF" ? "✓" : ""}</span><span className="format-option-name">PDF DIGITAL</span></span>
+                    <strong className="format-option-price">{selectedGroup === "CMAB" ? "RM18.00" : "RM10.00"}</strong>
+                    <span className="format-option-desc">Fail digital · cetak sendiri</span>
+                    <span className="format-option-foot">Tiada penghantaran fizikal</span>
+                  </button>
+                  <button type="button" className={`format-option ${selectedFormat === "Hardcopy" ? "format-option-active" : ""}`} aria-pressed={selectedFormat === "Hardcopy"} onClick={() => setSelectedFormat("Hardcopy")}>
+                    <span className="format-option-top"><span className="format-radio" aria-hidden="true">{selectedFormat === "Hardcopy" ? "✓" : ""}</span><span className="format-option-name">HARDCOPY BERCETAK</span></span>
+                    <strong className="format-option-price">{selectedGroup === "CMAB" ? "RM20.00" : "RM15.00"}</strong>
+                    <span className="format-option-desc">Bahan bercetak dihantar ke rumah</span>
+                    <span className="format-option-foot">{selectedGroup === "CMAB" ? "Postage termasuk" : "Alamat penghantaran diperlukan"}</span>
+                  </button>
+                </div>
+                <small className="field-hint">Set dipilih: {selectedGroup === "CMA" ? "Set A" : selectedGroup === "CMB" ? "Set B" : "Combo Set A + B"}. {isHardcopy ? "Isi alamat rumah di bawah untuk penghantaran." : "Alamat rumah tidak diperlukan untuk PDF."}</small>
               </div>
               <div className="form-grid">
                 <div className="field"><label htmlFor="name">Nama penuh</label><input id="name" autoComplete="name" value={form.customerName} onChange={(e) => update("customerName", e.target.value)} required maxLength={150} placeholder="Nama ibu/bapa" /></div>
