@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       return new NextResponse("Missing order number", { status: 400 });
     }
 
-    const supabase = getSupabaseAdmin();
+    const supabase = supabaseAdmin;
 
     if (status === "3") {
       const { data: order, error } = await supabase
